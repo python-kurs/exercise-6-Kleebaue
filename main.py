@@ -1,10 +1,9 @@
-# Exercise 6
-
 # -----------------------------------------------------------------------
-# load lib
+# Exercise 6
+# -----------------------------------------------------------------------
+# load libs
 from pathlib import Path
 from satpy import Scene, find_files_and_readers
-
 # -----------------------------------------------------------------------
 # set paths
 exercise = Path('/home/mklee/git/exercise-6-Kleebaue')
@@ -12,13 +11,18 @@ data_dir = Path('/home/mklee/git/py_skripte/data')
 output_dir = exercise / 'results'
 data_dir.mkdir(parents=True,exist_ok=True)
 output_dir.mkdir(parents=True,exist_ok=True)
+# -----------------------------------------------------------------------
 
 # 1. Read the Scene that you downloaded from the data directory using SatPy. [2P]
 files = find_files_and_readers(base_dir = data_dir,reader="seviri_l1b_nc")
 scn = Scene(filenames=files)
 
 # 2. Load the composites "natural_color" and "convection" [2P]
+
+# list all composite names
 scn.available_composite_names()
+
+# load natural_color and convection
 scn.load(["natural_color"])
 scn.load(["convection"])
 
@@ -56,4 +60,4 @@ local_scn.save_datasets(writer="simple_image",
                   datasets=["natural_color", "convection"],
                   filename="{name}_{start_time:%Y%m%d_%H%M%S}.png",
                   base_dir=output_dir)
-
+# -----------------------------------------------------------------------

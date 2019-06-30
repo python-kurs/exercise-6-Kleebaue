@@ -9,7 +9,7 @@ from utils import mkdir
 # set exercise, data and output paths
 exercise = Path('/home/mklee/git/exercise-6-Kleebaue')
 data_dir = Path('/home/mklee/git/py_skripte/data')
-output_dir = data_dir / 'results'
+output_dir = exercise / 'results'
 
 # using the utils function mkdir to create folders, if they doesn`t already exist
 mkdir(data_dir)
@@ -39,9 +39,9 @@ scn.load(["convection"])
 
 from pyresample.geometry import AreaDefinition
 
-area_id = "Dem. Rep. Kongo and its neighbours"
+area_id = "D.R. Kongo"
 description = "Dem. Rep. Kongo in Lambert Azimuthal Equal Area"
-proj_id = "Dem. Rep. Kongo and its neighbours"
+proj_id = "D.R. Kongo"
 proj_dict = {"proj": "laea", "lat_ts": -3, "lon_0": 23}
 
 width = 500    # width of the result domain in pixels
@@ -56,7 +56,6 @@ area_extent = (llx,lly,urx,ury)
 area_def = AreaDefinition(area_id, proj_id, description, proj_dict, width, height, area_extent)
 
 local_scn = scn.resample(area_def)
-local_scn.show("natural_color")
 
 # 4. Save both loaded composites of the resampled Scene as simple png images. [2P]
 local_scn.save_datasets(writer="simple_image",

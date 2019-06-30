@@ -4,13 +4,16 @@
 # load libs
 from pathlib import Path
 from satpy import Scene, find_files_and_readers
+from utils import mkdir
 # -----------------------------------------------------------------------
-# set paths
+# set exercise, data and output paths
 exercise = Path('/home/mklee/git/exercise-6-Kleebaue')
 data_dir = Path('/home/mklee/git/py_skripte/data')
-output_dir = exercise / 'results'
-data_dir.mkdir(parents=True,exist_ok=True)
-output_dir.mkdir(parents=True,exist_ok=True)
+output_dir = data_dir / 'results'
+
+# using the utils function mkdir to create folders, if they doesn`t already exist
+mkdir(data_dir)
+mkdir(output_dir)
 # -----------------------------------------------------------------------
 
 # 1. Read the Scene that you downloaded from the data directory using SatPy. [2P]
@@ -60,4 +63,3 @@ local_scn.save_datasets(writer="simple_image",
                   datasets=["natural_color", "convection"],
                   filename="{name}_{start_time:%Y%m%d_%H%M%S}.png",
                   base_dir=output_dir)
-# -----------------------------------------------------------------------
